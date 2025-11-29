@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PAPARAZZI PROYECT</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg-color: #f4f6f8;
+    --text-color: #1f2d3d;
+    --header-bg: #1e3a8a;
+    --header-text: #ffffff;
+    --button-bg: #1e3a8a;
+    --button-hover: #0f172a;
+}
+body.dark-mode {
+    --bg-color: #111827;
+    --text-color: #f3f4f6;
+    --header-bg: #1f2937;
+    --header-text: #f3f4f6;
+    --button-bg: #60a5fa;
+    --button-hover: #1e40af;
+}
+body { margin:0; font-family:'Poppins',sans-serif; background:var(--bg-color); color:var(--text-color); text-align:center; }
+header { background:var(--header-bg); color:var(--header-text); padding:20px; font-size:24px; }
+h1 { margin:0 0 20px 0; }
+.bienvenida { font-size:32px; margin:40px 0 20px 0; }
+.boton { display:inline-block; margin:10px; padding:12px 24px; font-size:18px; color:white; text-decoration:none; border-radius:8px; background:var(--button-bg); transition:0.3s; }
+.boton:hover { background:var(--button-hover); }
+.toggle-dark { position:fixed; right:20px; bottom:20px; font-size:22px; padding:10px; border-radius:50%; cursor:pointer; }
+.toggle-lang { position:fixed; left:20px; bottom:20px; font-size:16px; padding:8px 12px; border-radius:8px; cursor:pointer; }
+</style>
+</head>
+<body>
+
+<header>PAPARAZZI PROYECT</header>
+
+<h2 class="bienvenida">Bienvenido a PAPARAZZI PROYECT</h2>
+
+<a href="login.html" class="boton">Iniciar sesión</a>
+<a href="login.html" class="boton">Registrarse</a>
+
+<!-- Botón modo oscuro -->
+<button class="toggle-dark" onclick="toggleDarkMode()">🌙</button>
+
+<!-- Botón cambio de idioma (solo visual) -->
+<button class="toggle-lang" onclick="alert('Cambio de idioma simulado')">EN / ES</button>
+
+<script>
+function toggleDarkMode() {
+    document.body.classList.toggle('dark-mode');
+    localStorage.setItem("modo", document.body.classList.contains("dark-mode"));
+}
+window.onload = function() {
+    if (localStorage.getItem("modo") === "true") {
+        document.body.classList.add("dark-mode");
+    }
+};
+</script>
+
+</body>
+</html>
