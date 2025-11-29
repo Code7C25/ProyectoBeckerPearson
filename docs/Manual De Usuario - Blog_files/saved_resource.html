@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://web-sandbox.oaiusercontent.com/? -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Manual de Usuario — Blog (Interactivo)</title>
+  <style>
+    :root{--accent:#0b74de;--bg:#f6f8fb;--card:#fff;--muted:#6b7280}
+    body{font-family:Inter, Roboto, Arial, sans-serif;background:var(--bg);margin:0;color:#111}
+    header{background:linear-gradient(90deg,#ffffff, #f0f6ff);padding:18px 24px;border-bottom:1px solid #e6eef9;display:flex;gap:12px;align-items:center}
+    h1{font-size:20px;margin:0}
+    .container{max-width:1100px;margin:28px auto;padding:0 20px}
+    .grid{display:grid;grid-template-columns:320px 1fr;gap:20px}
+    .sidebar{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 6px 18px rgba(10,20,50,0.05)}
+    .main{min-height:60vh}
+    .search input{width:100%;padding:10px;border-radius:8px;border:1px solid #e6eef9}
+    nav ul{list-style:none;padding:0;margin:14px 0}
+    nav li{margin:8px 0}
+    a.item{display:block;padding:8px;border-radius:8px;text-decoration:none;color:#0b3a66}
+    a.item:hover{background:#f0f6ff}
+    .card{background:var(--card);padding:18px;border-radius:12px;box-shadow:0 6px 18px rgba(10,20,50,0.04);margin-bottom:14px}
+    .controls{display:flex;gap:8px;flex-wrap:wrap}
+    button{background:var(--accent);color:#fff;border:0;padding:8px 12px;border-radius:8px;cursor:pointer}
+    .muted{color:var(--muted)}
+    .section h2{margin-top:0}
+    .accordion .acc-item{border-top:1px solid #eef4fb;padding:12px 0}
+    .acc-title{display:flex;justify-content:space-between;cursor:pointer}
+    pre{background:#0f1724;color:#e6eef9;padding:12px;border-radius:8px;overflow:auto}
+    .kbd{background:#f3f4f6;border-radius:6px;padding:2px 6px;font-family:monospace;font-size:13px}
+    .topbar{margin-left:auto;display:flex;gap:10px;align-items:center}
+    .hint{font-size:13px;color:var(--muted)}
+    .tag{display:inline-block;background:#eef6ff;color:#0b74de;padding:6px 8px;border-radius:999px;font-size:13px}
+    footer{padding:20px;text-align:center;color:var(--muted);font-size:13px}
+    @media (max-width:880px){.grid{grid-template-columns:1fr}.sidebar{order:2}}
+  </style>
+<style>html,body,#root{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}html,body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Helvetica Neue,Arial,sans-serif!important}button,input,textarea,select{font-family:inherit}html{background-color:#fff}html.dark{background-color:#212121}html.mobileSkybridge.dark{background-color:#000}@supports (font: -apple-system-body){html.mobileSkybridge{font:-apple-system-body}}</style></head>
+<body style="">
+  <header>
+    <img src="data:image/svg+xml;utf8,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; width=&#39;36&#39; height=&#39;36&#39;&gt;&lt;rect rx=&#39;6&#39; width=&#39;36&#39; height=&#39;36&#39; fill=&#39;%230b74de&#39;/&gt;&lt;text x=&#39;50%&#39; y=&#39;58%&#39; font-size=&#39;18&#39; font-family=&#39;Arial&#39; text-anchor=&#39;middle&#39; fill=&#39;white&#39;&gt;B&lt;/text&gt;&lt;/svg&gt;" alt="logo" style="width:42px;height:42px;border-radius:8px;">
+    <div>
+      <h1>Manual de Usuario — Blog</h1>
+      <div class="hint">Manual interactivo + documentación de usuario imprimible</div>
+    </div>
+    <div class="topbar">
+      <button id="printBtn">Imprimir / Guardar PDF</button>
+      <button id="toggleView">Modo Manual de Usuario</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="grid">
+      <aside class="sidebar">
+        <div class="search">
+          <input id="search" placeholder="Buscar en el manual (ej: editar post)">
+        </div>
+        <nav>
+          <ul id="toc">
+            <li><a class="item" data-target="intro">Introducción</a></li>
+            <li><a class="item" data-target="login">Inicio de sesión / Registro</a></li>
+            <li><a class="item" data-target="posts">Crear / Editar Posts</a></li>
+            <li><a class="item" data-target="usuarios">Administrar usuarios</a></li>
+            <li><a class="item" data-target="imagenes">Imágenes y perfiles</a></li>
+            <li><a class="item" data-target="estructura">Estructura de archivos</a></li>
+            <li><a class="item" data-target="despliegue">Despliegue y requisitos</a></li>
+            <li><a class="item" data-target="seguridad">Seguridad y buenas prácticas</a></li>
+            <li><a class="item" data-target="solucion">Solución de problemas</a></li>
+            <li><a class="item" data-target="faq">FAQ</a></li>
+          </ul>
+        </nav>
+        <hr>
+        <div class="muted">Versión: 1.0 • Fecha: <!--dynamic--> <span id="fecha">29/11/2025</span></div>
+      </aside>
+
+      <main class="main">
+        <section class="card section" id="intro">
+          <h2>Introducción</h2>
+          <p>Este manual describe cómo usar el <strong>blog</strong> incluido en tu ZIP (backend PHP + formularios HTML). Está pensado para dos audiencias: <span class="tag">Usuarios</span> (crear y leer posts) y <span class="tag">Administradores</span> (gestión de usuarios y posts).</p>
+          <p>Usá la búsqueda o el índice para saltar a cualquier tema. Podés imprimir esta guía con el botón "Imprimir / Guardar PDF".</p>
+        </section>
+
+        <section class="card section" id="login">
+          <h2>Inicio de sesión y registro</h2>
+          <div class="accordion" id="acc-login">
+            <div class="acc-item">
+              <div class="acc-title"><strong>Acceso (login)</strong><span class="muted">/abrirsesion.php</span></div>
+              <div class="acc-body" style="display: block;">
+                <p>Ruta típica: <span class="kbd">login.html</span> o <span class="kbd">abrirsesion.php</span>. Introducí usuario y contraseña y hacé click en <em>Ingresar</em>.</p>
+                <ol>
+                  <li>Ir a <kbd>/login.html</kbd>.</li>
+                  <li>Completar <em>usuario</em> y <em>contraseña</em>.</li>
+                  <li>Si falla, revisá <code>conexion.php</code> y la tabla de usuarios en la base de datos.</li>
+                </ol>
+              </div>
+            </div>
+
+            <div class="acc-item">
+              <div class="acc-title"><strong>Registro de nuevos usuarios</strong><span class="muted">/nuevousuario.php</span></div>
+              <div class="acc-body" style="display: block;">
+                <p>Formulario disponible en <kbd>nuevousuario.html</kbd>. Campos típicos: nombre, email, contraseña y perfil.</p>
+                <pre>&lt;form action="nuevousuario.php" method="post" enctype="multipart/form-data"&gt; ... &lt;/form&gt;</pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="card section" id="posts">
+          <h2>Crear, editar y eliminar posts</h2>
+          <p>El flujo general para publicar contenido:</p>
+          <ol>
+            <li>Entrar con una cuenta con permisos.</li>
+            <li>Ir a <kbd>nuevopost.php</kbd> para crear un post nuevo.</li>
+            <li>Para editar usar <kbd>editar.php</kbd> o <kbd>editarus.php</kbd> según el caso.</li>
+            <li>Eliminar con <kbd>eliminar.php</kbd> o el icono de tacho en la interfaz.</li>
+          </ol>
+
+          <h3>Campos importantes</h3>
+          <ul>
+            <li><strong>Título</strong> — string</li>
+            <li><strong>Contenido</strong> — HTML o texto</li>
+            <li><strong>Imagen</strong> — archivo subido (ver carpeta /imagenes)</li>
+            <li><strong>Autor</strong> — id de usuario</li>
+          </ul>
+
+          <h3>Ejemplo mínimo (PHP)</h3>
+          <pre>&lt;?php
+// guardarnuevopost.php (simplificado)
+if($_SERVER['REQUEST_METHOD']==='POST'){
+  $titulo = $_POST['titulo'];
+  $contenido = $_POST['contenido'];
+  // Validar y escapar
+  // Mover archivo subido
+  // INSERT en la tabla posts
+}
+?&gt;</pre>
+        </section>
+
+        <section class="card section" id="usuarios">
+          <h2>Administración de usuarios</h2>
+          <p>Archivos relevantes: <kbd>adm_usuario.php</kbd>, <kbd>adm_usuarios.php</kbd>, <kbd>crearusuario.php</kbd>, <kbd>editarus.php</kbd>, <kbd>eliminar.php</kbd>.</p>
+          <h3>Crear usuario</h3>
+          <ol>
+            <li>Ir a <kbd>crearusuario.php</kbd> o usar el formulario <kbd>nuevousuario.html</kbd>.</li>
+            <li>Asignar rol (si existe) y cargar imagen de perfil opcional.</li>
+          </ol>
+          <h3>Editar usuario</h3>
+          <p>Usar <kbd>editarus.php</kbd>. Validar que la contraseña sea hasheada.</p>
+        </section>
+
+        <section class="card section" id="imagenes">
+          <h2>Imágenes y perfiles</h2>
+          <p>Las imágenes se almacenan en carpetas como <kbd>/imagenes</kbd> o <kbd>/Perfiles</kbd>. Verificá permisos 755/775 al subir archivos desde PHP.</p>
+          <ul>
+            <li>Controlá el tipo MIME y el tamaño antes de mover el archivo.</li>
+            <li>Evitar nombres de archivo con espacios; usar <code>uniqid()</code> o un hash.</li>
+          </ul>
+        </section>
+
+        <section class="card section" id="estructura">
+          <h2>Estructura de archivos (resumen)</h2>
+          <p>Listado corto de los archivos más relevantes encontrados en el ZIP:</p>
+          <ul>
+            <li><kbd>index.php</kbd> — página principal</li>
+            <li><kbd>abrirsesion.php</kbd> — login</li>
+            <li><kbd>crearusuario.php</kbd>, <kbd>nuevousuario.php</kbd> — registro</li>
+            <li><kbd>nuevopost.php</kbd>, <kbd>guardarnuevopost.php</kbd> — posts</li>
+            <li><kbd>conexion.php</kbd> — datos de conexión a la BD</li>
+            <li>Carpeta <kbd>/Perfiles</kbd> y <kbd>/imagenes</kbd> — assets</li>
+          </ul>
+        </section>
+
+        <section class="card section" id="despliegue">
+          <h2>Despliegue y requisitos</h2>
+          <ul>
+            <li>PHP 7.4+ recomendado (ajustar según funciones usadas).</li>
+            <li>Servidor web (Apache / Nginx) con mod_php o PHP-FPM.</li>
+            <li>Base de datos MySQL / MariaDB; revisar <kbd>conexion.php</kbd>.</li>
+            <li>Permisos de carpetas: asegurar que la carpeta de uploads sea escribible por PHP.</li>
+          </ul>
+
+          <h3>Pasos rápidos</h3>
+          <ol>
+            <li>Subir archivos al servidor en la carpeta pública.</li>
+            <li>Crear la base de datos e importar el esquema (si tenés .sql).</li>
+            <li>Editar <kbd>conexion.php</kbd> con credenciales.</li>
+            <li>Probar <kbd>/index.php</kbd> y login.</li>
+          </ol>
+        </section>
+
+        <section class="card section" id="seguridad">
+          <h2>Seguridad y buenas prácticas</h2>
+          <ul>
+            <li>Usar <strong>password_hash()</strong> y <strong>password_verify()</strong> para contraseñas.</li>
+            <li>Preparar sentencias (prepared statements) para evitar SQL injection.</li>
+            <li>Validar y sanear todo input de usuario (HTML/JS) para evitar XSS.</li>
+            <li>Limitar tamaño y tipo de archivos subidos.</li>
+            <li>Deshabilitar display_errors en producción.</li>
+          </ul>
+        </section>
+
+        <section class="card section" id="solucion">
+          <h2>Solución de problemas comunes</h2>
+          <div>
+            <strong>Error de conexión a la DB</strong>
+            <p>Revisá <kbd>conexion.php</kbd>, usuario, contraseña, host y que el servicio de MySQL esté corriendo.</p>
+          </div>
+          <div>
+            <strong>Imágenes que no suben</strong>
+            <p>Revisá permisos y <kbd>upload_max_filesize</kbd> / <kbd>post_max_size</kbd> en php.ini.</p>
+          </div>
+          <div>
+            <strong>Login fallido</strong>
+            <p>Verificar hashing y que la consulta SELECT devuelve el usuario esperado.</p>
+          </div>
+        </section>
+
+        <section class="card section" id="faq">
+          <h2>Preguntas frecuentes (FAQ)</h2>
+          <ol>
+            <li><strong>¿Puedo cambiar el diseño?</strong> Sí: editá CSS o reemplazá plantillas en la carpeta /BLOG/BLOG.</li>
+            <li><strong>¿Dónde están las imágenes de perfil?</strong> /Perfiles dentro del ZIP.</li>
+            <li><strong>¿Cómo hago una copia de seguridad?</strong> Exportá la base de datos y guardá la carpeta de uploads.</li>
+          </ol>
+        </section>
+
+      </main>
+    </div>
+  </div>
+
+  <footer>
+    Manual generado automáticamente — Si querés, puedo exportarlo a PDF o añadir pasos detallados para cada archivo PHP.
+  </footer>
+
+  <script>
+    // Init
+    document.getElementById('fecha').textContent = new Date().toLocaleDateString('es-ES');
+
+    // Table of contents navigation
+    document.querySelectorAll('a.item').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        const t = document.getElementById(a.dataset.target);
+        if(t) t.scrollIntoView({behavior:'smooth',block:'start'});
+      });
+    });
+
+    // Accordion behavior
+    document.querySelectorAll('.acc-item').forEach(item=>{
+      const title = item.querySelector('.acc-title');
+      const body = item.querySelector('.acc-body');
+      if(body) body.style.display='block';
+      title.addEventListener('click', ()=>{
+        if(body.style.display==='none') body.style.display='block'; else body.style.display='block';
+      });
+    });
+
+    // Search
+    document.getElementById('search').addEventListener('input', e=>{
+      const q = e.target.value.toLowerCase();
+      document.querySelectorAll('.section').forEach(sec=>{
+        const text = sec.textContent.toLowerCase();
+        sec.style.display = text.includes(q) ? 'block' : 'none';
+      });
+    });
+
+    // Print
+    document.getElementById('printBtn').addEventListener('click', ()=> window.print());
+
+    // Toggle between interactive web manual and printable user manual (simple switch)
+    let printable=false;
+    document.getElementById('toggleView').addEventListener('click', ()=>{
+      printable = !printable;
+      if(printable){
+        document.body.style.fontSize='16px';
+        alert('Modo "Manual de Usuario" activado: verás la guía con foco en pasos. Usá Imprimir para PDF.');
+      } else {
+        document.body.style.fontSize='';
+      }
+    });
+
+    // Small accessibility: keyboard shortcut 'f' focuses search
+    document.addEventListener('keydown', e=>{
+      if(e.key==='f' && !e.metaKey && !e.ctrlKey){
+        e.preventDefault(); document.getElementById('search').focus();
+      }
+    });
+  </script>
+
+
+</body></html>
