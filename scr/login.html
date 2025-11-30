@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="utf-8">
+    <style>
+        :root {
+            --bg-color: #f4f6f8;
+            --text-color: #1f2d3d;
+            --primary-color: #1e3a8a;
+            --primary-hover: #0f172a;
+            --input-bg: #ffffff;
+            --input-border: #1e3a8a;
+            --button-bg: #1e3a8a;
+            --button-text: #ffffff;
+        }
+        body.dark-mode {
+            --bg-color: #111827;
+            --text-color: #f3f4f6;
+            --primary-color: #60a5fa;
+            --primary-hover: #93c5fd;
+            --input-bg: #1e293b;
+            --input-border: #60a5fa;
+            --button-bg: #3b82f6;
+            --button-text: #ffffff;
+        }
+        body {
+            background-color: var(--bg-color);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 50px;
+            color: var(--text-color);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        h1 { color: var(--primary-color); margin-bottom: 30px; }
+        label { display: block; margin-top: 15px; font-weight: 500; }
+        input { margin: 10px 0; padding: 10px; width: 250px; border-radius: 4px; border: 1px solid var(--input-border); background-color: var(--input-bg); color: var(--text-color); }
+        input[type="submit"], button {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 4px;
+        }
+        input[type="submit"]:hover, button:hover { background-color: var(--primary-hover); }
+        .toggle-dark, #toggle-lang {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            color: var(--primary-color);
+            transition: transform 0.2s ease;
+        }
+        #toggle-lang { top: 60px; font-size: 16px; padding: 5px 10px; }
+        .toggle-dark:hover { transform: rotate(20deg); }
+    </style>
+</head>
+<body>
+    <h1 id="titulo">Inicio de sesión</h1>
+
+    <!-- Formulario de login -->
+    <form action="abrirsesion.php" method="post">
+        <label for="nick" id="label-nick">Usuario (nickname):</label>
+        <input type="text" name="nick" id="nick" required>
+        
+        <label for="contra" id="label-contra">Contraseña:</label>
+        <input type="password" name="contra" id="contra" required>
+        
+        <input type="submit" name="abrir" id="submit-abrir" value="Abrir sesión">
+    </form>
+
+    <!-- Botón invitado -->
+    <form action="index.php" method="get">
+        <input type="hidden" name="guest" value="1">
+        <button type="submit" id="btn-invitado">Entrar como invitado</button>
+    </form>
+
+    <!-- Botón crear usuario -->
+    <form action="clave_crearusuario.php" method="get">
+        <button type="submit" id="btn-crear">Crear nuevo usuario</button>
+    </form>
+
+    <!-- Botones superiores -->
+    <button class="toggle-dark" onclick="toggleDarkMode()">🌙</button>
+    <button id="toggle-lang">EN</button>
+
+    <script>
+        // Modo oscuro
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('modoOscuro', document.body.classList.contains('dark-mode'));
+        }
+
+        // Textos de idioma
+        const textos = {
+            es: {
+                titulo: "Inicio de sesión",
+                usuario: "Usuario (nickname):",
+                contra: "Contraseña:",
+                abrir: "Abrir sesión",
+                invitado: "Entrar como invitado",
+                crear: "Crear nuevo usuario"
+            },
+            en: {
+                titulo: "Login",
+                usuario: "Username (nickname):",
+                contra: "Password:",
+                abrir: "Login",
+                invitado: "Enter as guest",
+                crear: "Create new user"
+            }
+        };
+
+        let idioma = localStorage.getItem('idioma') || 'es';
+
+        function aplicarIdioma() {
+            document.getElementById('titulo').textContent = textos[idioma].titulo;
+            document.getElementById('label-nick').textContent = textos[idioma].usuario;
+            document.getElementById('label-contra').textContent = textos[idioma].contra;
+            document.getElementById('submit-abrir').value = textos[idioma].abrir;
+            document.getElementById('btn-invitado').textContent = textos[idioma].invitado;
+            document.getElementById('btn-crear').textContent = textos[idioma].crear;
+            document.getElementById('toggle-lang').textContent = idioma === 'es' ? 'EN' : 'ES';
+        }
+
+        function cambiarIdioma() {
+            idioma = idioma === 'es' ? 'en' : 'es';
+            localStorage.setItem('idioma', idioma);
+            aplicarIdioma();
+        }
+
+        window.onload = function () {
+            if (localStorage.getItem('modoOscuro') === 'true') {
+                document.body.classList.add('dark-mode');
+            }
+            aplicarIdioma();
+        };
+
+        document.getElementById('toggle-lang').addEventListener('click', cambiarIdioma);
+    </script>
+</body>
+</html>
